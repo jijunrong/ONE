@@ -1,0 +1,39 @@
+name: 优选IP
+
+on: 
+  schedule:
+    - cron: '0 10 * * *'  # 每天上午10点运行一次
+
+jobs:
+  IP:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检查 仓库
+        uses: actions/checkout@v4
+
+      - name: 下载 解压
+        run: |
+          mkdir -p ${{ github.workspace }}/IP
+          curl -o ${{ github.workspace }}/IP/ip.zip https://zip.baipiao.eu.org/
+          unzip -d ${{ github.workspace }}/IP/ ${{ github.workspace }}/IP/ip.zip
+
+      - name: 合并 TXT
+        run: |
+          > ${{ github.workspace }}/ip.txt
+          for file in ${{ github.workspace }}/IP/*.txt; do
+            if [[ "$file" == *443* && "$file" != *8443* ]]; then
+              cat "$file" >> ${{ github.workspace }}/ip.txt
+            fi
+          done
+
+      - name: 推送 GitHub
+        run: |
+          git config --global user.name 'jijunrong'
+          git config --global user.email 'jijunrong888@gmail.com'
+          git add ip.txt
+          git commit -m "更新 ip.txt 文件内容" || echo "No changes to commit"
+          git push origin HEAD:main
+
+      - name: 清理 残余
+        run: |
+          rm -rf ${{ github.workspace }}/IP

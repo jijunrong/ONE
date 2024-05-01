@@ -3,7 +3,8 @@ name: 优选IP
 on: 
   schedule:
     - cron: '0 10 * * *'  # 每天上午10点运行一次
-
+  workflow_dispatch:  # 手动触发器
+  
 jobs:
   IP:
     runs-on: ubuntu-latest

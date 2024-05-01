@@ -2,7 +2,7 @@ name: 优选IP
 
 on: 
   schedule:
-    - cron: '0 10 * * *'  # 每天上午10点运行一次
+    - cron: '0 1,5,10 * * *'  # 凌晨1点执行一次 上午 5点 上午10点执行一次
   workflow_dispatch:  # 手动触发器
   
 jobs:

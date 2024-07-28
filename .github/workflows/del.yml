@@ -7,16 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  del_runs:
+  cleanup:
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: read
+
     steps:
-      - name: 删除当前仓库的工作流运行
-        uses: Mattraks/delete-workflow-runs@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          token: ${{ secrets.WORK_TOKEN }}
-          repository: ${{ github.repository }}
-          retain_days: 7
-          keep_minimum_runs: 6
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: |
+          pip install requests
+
+      - name: Cleanup Old Workflow Runs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python cleanup_old_workflows.py

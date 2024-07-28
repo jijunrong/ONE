@@ -35,7 +35,7 @@ def main():
         for run in runs['workflow_runs']:
             run_date = datetime.strptime(run['created_at'], '%Y-%m-%dT%H:%M:%SZ')
             if run_date < cutoff_date:
-                print(f'Deleting workflow run {run["id"]} from {run_date}')
+                print(f'正在删除创建于 {run_date} 的工作流运行记录 {run["id"]}')
                 delete_workflow_run(run['id'])
 
         page += 1

@@ -5,12 +5,15 @@ from datetime import datetime, timedelta
 # 配置
 REPO = os.getenv('GITHUB_REPOSITORY')
 TOKEN = os.getenv('GITHUB_TOKEN')
-DAYS_TO_KEEP = 7  # 保留最近30天的工作流运行记录
+DAYS_TO_KEEP = 7  # 保留最近7天的工作流运行记录
 
 # 计算删除的截止日期
 cutoff_date = datetime.now() - timedelta(days=DAYS_TO_KEEP)
 
 def get_workflow_runs(page=1):
+    """
+    获取工作流运行记录
+    """
     url = f'https://api.github.com/repos/{REPO}/actions/runs'
     headers = {'Authorization': f'token {TOKEN}'}
     params = {'per_page': 100, 'page': page}
@@ -19,6 +22,9 @@ def get_workflow_runs(page=1):
     return response.json()
 
 def delete_workflow_run(run_id):
+    """
+    删除指定的工作流运行记录
+    """
     url = f'https://api.github.com/repos/{REPO}/actions/runs/{run_id}'
     headers = {'Authorization': f'token {TOKEN}'}
     response = requests.delete(url, headers=headers)

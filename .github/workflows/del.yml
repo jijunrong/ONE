@@ -1,0 +1,22 @@
+name: 删除旧的工作流运行
+
+on:
+  # 每周运行一次，在星期天的00:00。
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  del_runs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: 删除当前仓库的工作流运行
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ secrets.WORK_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 7
+          keep_minimum_runs: 6

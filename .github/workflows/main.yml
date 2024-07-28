@@ -2,7 +2,7 @@ name: 优选IP
 
 on: 
   schedule:
-    - cron: '0 17,20,2 * * *'  # 中国时间UTC+8凌晨1点执行一次 上午 4点 上午10点执行一次
+    - cron: '0 17,20,2 * * *'  # 中国时间UTC+8凌晨1点执行一次 上午4点 上午10点执行一次
   workflow_dispatch:  # 手动触发器
   
 jobs:
@@ -22,7 +22,7 @@ jobs:
         run: |
           > ${{ github.workspace }}/ip.txt
           for file in ${{ github.workspace }}/IP/*.txt; do
-            if [[ "$file" == *443* && "$file" != *8443* ]]; then
+            if [[ "$file" == *443* || "$file" == *80* ]]; then
               cat "$file" >> ${{ github.workspace }}/ip.txt
             fi
           done

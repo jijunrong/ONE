@@ -11,19 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: 检出仓库
+        uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
-      - name: Install Dependencies
+      - name: 安装依赖
         run: |
           pip install requests
 
-      - name: Cleanup Old Workflow Runs
+      - name: 清理旧的工作流运行记录
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

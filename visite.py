@@ -56,11 +56,11 @@ def visit_website(driver, url):
         driver.get(url)
         print(f"成功访问 {url}")
         # 停留至少10秒
-        time.sleep(600)
+        time.sleep(180)
         # 执行一些简单的操作
         actions = ActionChains(driver)
         actions.move_by_offset(10, 10).perform()  # 移动鼠标
-        time.sleep(2)
+        time.sleep(180)
         actions.click().perform()  # 点击
         print(f"在 {url} 上成功执行操作")
     except Exception as e:

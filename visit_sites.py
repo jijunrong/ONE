@@ -1,4 +1,5 @@
 import requests
+import time
 import random
 
 # 目标网站列表
@@ -9,7 +10,7 @@ urls = [
     'https://one.jijunrong.com',
     'https://one.jijunrong.top',
     'https://one.jijunrong.site',
-    'https://one.jijunrong.one'
+    'https://video.jijunrong.com'
 ]
 
 # 访问网站函数

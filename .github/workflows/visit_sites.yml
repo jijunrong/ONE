@@ -1,0 +1,28 @@
+name: Visit Sites
+
+on:
+  schedule:
+    # 每分钟定期运行一次
+    - cron: '*/1 * * * *'
+  push:
+    branches:
+      - main
+
+jobs:
+  visit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install requests
+      run: pip install requests
+
+    - name: Run visit_sites.py
+      run: python visit_sites.py

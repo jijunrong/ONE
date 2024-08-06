@@ -1,4 +1,4 @@
-name: Visit Sites
+name: 简单点击访问
 
 on:
   schedule:
@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: 检出仓库
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
 
-    - name: Install requests
-      run: pip install requests
+      - name: 安装依赖
+        run: pip install requests
 
-    - name: Run visit_sites.py
-      run: python visit_sites.py
+      - name: 运行脚本
+        run: python visit_sites.py

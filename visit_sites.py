@@ -1,5 +1,4 @@
 import requests
-import time
 import random
 
 # 目标网站列表
@@ -24,8 +23,8 @@ def visit_site(url):
     except Exception as e:
         print(f"访问 {url} 时发生错误: {e}")
 
-# 遍历网站列表，每个网站访问10次
+
+# 遍历网站列表，每个网站访问一次
 for url in urls:
-    for _ in range(10):
-        visit_site(url)
-        time.sleep(random.uniform(1, 5))  # 随机等待1到5秒
+    visit_site(url)
+    time.sleep(random.uniform(1, 5))  # 随机等待1到5秒

@@ -1,4 +1,4 @@
-name: Run Browser Script
+name: 浏览器访问
 
 on:
   schedule:

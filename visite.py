@@ -56,7 +56,7 @@ def visit_website(driver, url):
         driver.get(url)
         print(f"成功访问 {url}")
         # 停留至少10秒
-        time.sleep(10)
+        time.sleep(600)
         # 执行一些简单的操作
         actions = ActionChains(driver)
         actions.move_by_offset(10, 10).perform()  # 移动鼠标
